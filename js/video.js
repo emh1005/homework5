@@ -1,5 +1,6 @@
 // Add js here.
 const videoPlayer = document.querySelector('#videoplayer');
+const volume = document.querySelector('#volume');
 
 // page load (do i need the event listener?)
 //window.addEventListener('load', function() {
@@ -45,21 +46,23 @@ document.querySelector('#faster').addEventListener('click', function() {
 document.querySelector('#skip').addEventListener('click', function() {
     videoPlayer.currentTime += 15;
     if (videoPlayer.currentTime > videoPlayer.duration) {
-        videoPlayer.currentTime = 0; //need to play again??
+        videoPlayer.currentTime = 0;
     }
 })
 
 //mute
 document.querySelector('#mute').addEventListener('click', function() {
     if (!videoPlayer.muted){
-        videoPlayer.muted = true; 
+        videoPlayer.muted = true;
+        volume.textContent = '0%';
     } else {
         videoPlayer.muted = false;
+        volume.textContent = `${document.querySelector('#slider').value}%`;
     }
 })
 
 //volume slider
 document.querySelector('#slider').addEventListener('change', function() {
     videoPlayer.volume = (document.querySelector('#slider').value / 100);
-    document.querySelector('#volume').textContent = `${document.querySelector('#slider').value}%`;
+    volume.textContent = `${document.querySelector('#slider').value}%`;
 })
